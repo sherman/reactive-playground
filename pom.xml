@@ -12,6 +12,8 @@
 
     <name>Reactive playground</name>
     <modules>
+        <module>base-dependencies</module>
+        <module>common</module>
     </modules>
 
     <properties>
@@ -96,6 +98,18 @@
                         <artifactId>tools</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>io.reactive</groupId>
+                <artifactId>base-dependencies</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.reactive</groupId>
+                <artifactId>common</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
