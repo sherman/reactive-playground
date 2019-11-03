@@ -67,7 +67,7 @@ public class IncomingMessageEndpoint {
         try {
             userMessage = objectMapper.readValue(message, Message.class);
         } catch (IOException e) {
-            log.error("Invalid message {}", message, e);
+            log.error("Invalid message: [{}]", message, e);
             throw new IllegalArgumentException("Invalid message!");
         }
 
