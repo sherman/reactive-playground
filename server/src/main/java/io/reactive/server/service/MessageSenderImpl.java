@@ -22,6 +22,7 @@ package io.reactive.server.service;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.EvictingQueue;
 import io.reactive.server.configuration.ActorScope;
+import io.reactive.server.configuration.ServerConfiguration;
 import io.reactive.server.domain.Message;
 import io.reactive.server.domain.ServerClient;
 import io.reactive.server.domain.ServerClientConnection;
@@ -50,24 +51,33 @@ public class MessageSenderImpl extends Actor<MessageSenderImpl.BaseMessage> impl
 
     private final ServerClientStore serverClientStore;
     private final WebSocketUtils webSocketUtils;
+    private final ServerConfiguration serverConfiguration;
 
     @Inject
-    public MessageSenderImpl(@ActorScope ExecutorService actorExecutor, ServerClientStore serverClientStore, WebSocketUtils webSocketUtils) {
+    public MessageSenderImpl(
+        @ActorScope ExecutorService actorExecutor,
+        ServerClientStore serverClientStore,
+        WebSocketUtils webSocketUtils,
+        ServerConfiguration serverConfiguration
+    ) {
         super(actorExecutor);
         this.serverClientStore = serverClientStore;
         this.webSocketUtils = webSocketUtils;
+        this.serverConfiguration = serverConfiguration;
     }
 
     @Override
     public void addMessage(long clientId, @NotNull Message message) {
-        ServerClientMessageList messages = clientsToMessages.computeIfAbsent(clientId, client -> new ServerClientMessageList(EvictingQueue.create(5000)));
+        ServerClientMessageList messages = clientsToMessages.computeIfAbsent(
+            clientId, client -> new ServerClientMessageList(EvictingQueue.create(serverConfiguration.getMaxMessages())));
         messages.add(webSocketUtils.getMessage(message));
         enqueue(new Send(clientId));
     }
 
     @Override
     public void addMessages(long clientId, @NotNull List<Message> messages) {
-        ServerClientMessageList userMessages = clientsToMessages.computeIfAbsent(clientId, client -> new ServerClientMessageList(EvictingQueue.create(5000)));
+        ServerClientMessageList userMessages = clientsToMessages.computeIfAbsent(
+            clientId, client -> new ServerClientMessageList(EvictingQueue.create(serverConfiguration.getMaxMessages())));
         for (Message message : messages) {
             userMessages.add(webSocketUtils.getMessage(message));
         }

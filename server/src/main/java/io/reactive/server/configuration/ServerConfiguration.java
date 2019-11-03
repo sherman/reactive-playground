@@ -19,17 +19,23 @@ package io.reactive.server.configuration;
  * limitations under the License.
  */
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Singleton
 public class ServerConfiguration {
-    //@Inject
+    @Inject
     @Named("server.max.messages.in.flight")
-    private int maxMessagesInFlight = 2;
+    private int maxMessagesInFlight;
 
+    @Inject
     @Named("server.messages.multiplier")
-    private int messageMultiplier = 1;
+    private int messageMultiplier;
+
+    @Inject
+    @Named("server.max.messages")
+    private int maxMessages;
 
     public int getMaxMessagesInFlight() {
         return maxMessagesInFlight;
@@ -37,5 +43,9 @@ public class ServerConfiguration {
 
     public int getMessageMultiplier() {
         return messageMultiplier;
+    }
+
+    public int getMaxMessages() {
+        return maxMessages;
     }
 }
