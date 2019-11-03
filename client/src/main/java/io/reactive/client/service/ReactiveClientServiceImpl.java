@@ -20,6 +20,7 @@ package io.reactive.client.service;
  */
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import io.reactive.client.domain.ClientType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,17 +34,28 @@ public class ReactiveClientServiceImpl implements ReactiveClientService {
     private static final Logger log = LoggerFactory.getLogger(ReactiveClientServiceImpl.class);
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(
-        256,
+        8,
         new ThreadFactoryBuilder()
             .setDaemon(true)
             .setNameFormat("Client executor-%d")
             .build()
     );
-    
+
     private final ReactiveClientStore reactiveClientStore;
 
-    public ReactiveClientServiceImpl(String serverUrlTemplate) {
-        this.reactiveClientStore = new ReactiveClientStoreImpl(serverUrlTemplate);
+    public ReactiveClientServiceImpl(String serverUrlTemplate, ClientType clientType) {
+        switch (clientType) {
+            case JETTY:
+                this.reactiveClientStore = new JettyReactiveClientStoreImpl(serverUrlTemplate);
+                break;
+
+            case NETTY:
+                this.reactiveClientStore = new NettyReactiveClientStoreImpl(serverUrlTemplate);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Unknown client!");
+        }
     }
 
     @Override

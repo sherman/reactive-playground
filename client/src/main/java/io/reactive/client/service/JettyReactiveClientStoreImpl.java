@@ -31,8 +31,8 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ReactiveClientStoreImpl implements ReactiveClientStore {
-    private static final Logger log = LoggerFactory.getLogger(ReactiveClientStoreImpl.class);
+public class JettyReactiveClientStoreImpl implements ReactiveClientStore {
+    private static final Logger log = LoggerFactory.getLogger(JettyReactiveClientStoreImpl.class);
 
     private final String serverUrlTemplate; // http://127.0.0.1:6644/message?userId=
 
@@ -42,8 +42,8 @@ public class ReactiveClientStoreImpl implements ReactiveClientStore {
     private final WebSocketClient client;
     private final WebSocketHandler webSocketHandler;
 
-    public ReactiveClientStoreImpl(String serverUrlTemplate) {
-        client = new WebSocketClient(Executors.newFixedThreadPool(256));
+    public JettyReactiveClientStoreImpl(String serverUrlTemplate) {
+        client = new WebSocketClient(Executors.newFixedThreadPool(8));
         client.setConnectTimeout(1000000);
 
         try {
