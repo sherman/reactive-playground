@@ -77,7 +77,7 @@ public abstract class Actor<M> implements Runnable {
         if (messages.offer(message)) {
             tryToScheduleExecution();
         } else {
-            // TODO: handle error?
+            stop();
         }
     }
 
@@ -104,8 +104,6 @@ public abstract class Actor<M> implements Runnable {
                 // TODO: process messages already in the queue?
                 return false;
             }
-        } else {
-            //log.info("Already scheduled!");
         }
 
         return false;
