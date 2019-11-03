@@ -120,7 +120,7 @@ public class MessageSenderImpl extends Actor<MessageSenderImpl.BaseMessage> impl
                     if (messages.getSize() > 0) {
                         if (log.isTraceEnabled()) {
                             log.trace(
-                                "Message left: [{}], discarded: [{}], if fullfilled: [{}]",
+                                "Message left: [{}], discarded: [{}], is full filled: [{}]",
                                 messages.getSize(),
                                 clientConnection.getDemandIsFullFilledEvents(),
                                 subscription.getDemand().isFulfilled()
