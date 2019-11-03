@@ -121,7 +121,7 @@ public class ServerClientConnection implements Flow.Subscriber<WebSocketMessage>
         return subscription;
     }
 
-    public void onDiscardMessage() {
+    public void onDemandIsFullFilled() {
         demandIsFullFilledEvents.incrementAndGet();
     }
 

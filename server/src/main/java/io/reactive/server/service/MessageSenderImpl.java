@@ -111,7 +111,7 @@ public class MessageSenderImpl extends Actor<MessageSenderImpl.BaseMessage> impl
                             if (subscription.getDemand().decrease(1) > 0) {
                                 clientConnection.onNext(iterator.next());
                             } else {
-                                clientConnection.onDiscardMessage();
+                                clientConnection.onDemandIsFullFilled();
                                 break;
                             }
                         }
