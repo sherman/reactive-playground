@@ -20,6 +20,7 @@ package io.reactive.server.domain;
  */
 
 import io.reactive.server.configuration.RootModule;
+import io.reactive.server.configuration.ServerConfiguration;
 import io.reactive.server.service.ServerClientConnectionFactory;
 import io.reactive.server.util.WebSocketSubscription;
 import org.mockito.stubbing.Answer;
@@ -42,13 +43,16 @@ public class ServerClientConnectionTest {
     @Inject
     private ServerClientConnectionFactory connectionFactory;
 
+    @Inject
+    private ServerConfiguration serverConfiguration;
+
     @Test
     public void initialDemand() {
         WebSocketSubscription socketSubscription = new WebSocketSubscription();
         Session session = mock(Session.class);
         ServerClientConnection clientConnection = connectionFactory.create(42L, session);
         clientConnection.onSubscribe(socketSubscription);
-        assertEquals(socketSubscription.getDemand().current(), 1);
+        assertEquals(socketSubscription.getDemand().current(), serverConfiguration.getMaxMessagesInFlight());
     }
 
     @Test
@@ -67,6 +71,6 @@ public class ServerClientConnectionTest {
         ServerClientConnection clientConnection = connectionFactory.create(42L, session);
         clientConnection.onSubscribe(socketSubscription);
         clientConnection.onNext(new WebSocketMessage("{}", System.currentTimeMillis()));
-        assertEquals(socketSubscription.getDemand().current(), 2);
+        assertEquals(socketSubscription.getDemand().current(), serverConfiguration.getMaxMessagesInFlight() + 1);
     }
 }
