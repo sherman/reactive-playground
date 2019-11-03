@@ -42,7 +42,7 @@ public class ServerClientConnection implements Flow.Subscriber<WebSocketMessage>
 
     private WebSocketSubscription subscription;
 
-    private final AtomicInteger discardedMessages = new AtomicInteger();
+    private final AtomicInteger demandIsFullFilledEvents = new AtomicInteger();
     private final AtomicInteger sentMessages = new AtomicInteger();
 
     public ServerClientConnection(long userId, Session session, int maxMessagesInFlight, Consumer<SendResult> resultHandler) {
@@ -122,11 +122,11 @@ public class ServerClientConnection implements Flow.Subscriber<WebSocketMessage>
     }
 
     public void onDiscardMessage() {
-        discardedMessages.incrementAndGet();
+        demandIsFullFilledEvents.incrementAndGet();
     }
 
-    public int getDiscardedMessages() {
-        return discardedMessages.get();
+    public int getDemandIsFullFilledEvents() {
+        return demandIsFullFilledEvents.get();
     }
 
     public void onSendMessage() {

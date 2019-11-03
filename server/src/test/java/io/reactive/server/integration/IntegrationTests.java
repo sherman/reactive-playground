@@ -117,12 +117,12 @@ public class IntegrationTests {
         }
         messagesEndpointSession.close();
 
-        // wait for discarded messages event
+        // wait for demand is full filled events
         Awaitility.await().forever().until(
-            () -> serverClientStore.getClient(42L).getConnections().get(0).getDiscardedMessages() > 0
+            () -> serverClientStore.getClient(42L).getConnections().get(0).getDemandIsFullFilledEvents() > 0
         );
 
-        log.info("Discarded messages: [{}]", serverClientStore.getClient(42L).getConnections().get(0).getDiscardedMessages());
+        log.info("Demand is full filled events: [{}]", serverClientStore.getClient(42L).getConnections().get(0).getDemandIsFullFilledEvents());
         log.info("Sent messages: [{}]", serverClientStore.getClient(42L).getConnections().get(0).getSentMessages());
 
         // drop off the barrier
