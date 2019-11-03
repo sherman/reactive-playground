@@ -60,14 +60,14 @@ public class MessageSenderImpl extends Actor<MessageSenderImpl.BaseMessage> impl
 
     @Override
     public void addMessage(long clientId, @NotNull Message message) {
-        ServerClientMessageList messages = clientsToMessages.computeIfAbsent(clientId, client -> new ServerClientMessageList(EvictingQueue.create(500000)));
+        ServerClientMessageList messages = clientsToMessages.computeIfAbsent(clientId, client -> new ServerClientMessageList(EvictingQueue.create(5000)));
         messages.add(webSocketUtils.getMessage(message));
         enqueue(new Send(clientId));
     }
 
     @Override
     public void addMessages(long clientId, @NotNull List<Message> messages) {
-        ServerClientMessageList userMessages = clientsToMessages.computeIfAbsent(clientId, client -> new ServerClientMessageList(EvictingQueue.create(500000)));
+        ServerClientMessageList userMessages = clientsToMessages.computeIfAbsent(clientId, client -> new ServerClientMessageList(EvictingQueue.create(5000)));
         for (Message message : messages) {
             userMessages.add(webSocketUtils.getMessage(message));
         }
@@ -76,7 +76,7 @@ public class MessageSenderImpl extends Actor<MessageSenderImpl.BaseMessage> impl
 
     @Override
     protected void dispatch(BaseMessage message) {
-        //log.info("Handle message [{}]", message);
+        log.trace("Handle message [{}]", message);
 
         if (message instanceof Send) {
             onSend((Send) message);
@@ -117,8 +117,6 @@ public class MessageSenderImpl extends Actor<MessageSenderImpl.BaseMessage> impl
                             );
                         }
                         enqueue(new Send(message.clientId));
-                    } else {
-                        //log.info("No messages: [{}]", clientConnection.getSentMessages());
                     }
                 }
             }
