@@ -110,6 +110,11 @@ public class ReactiveClientServiceImpl implements ReactiveClientService {
 
         log.info("All messages received!");
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ignored) {
+        }
+
         reactiveClientStore.removeAll();
 
         executorService.shutdownNow();

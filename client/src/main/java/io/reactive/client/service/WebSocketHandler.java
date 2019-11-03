@@ -21,11 +21,15 @@ package io.reactive.client.service;
 
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 @WebSocket
 public class WebSocketHandler {
+    private static final Logger log = LoggerFactory.getLogger(WebSocketHandler.class);
+
     private final AtomicInteger messageCounter;
 
     public WebSocketHandler(AtomicInteger messageCounter) {
@@ -34,6 +38,9 @@ public class WebSocketHandler {
 
     @OnWebSocketMessage
     public void onTextMessage(String message) {
-        messageCounter.incrementAndGet();
+        int messages = messageCounter.incrementAndGet();
+        if (messages % 100000 == 0) {
+            //log.info("Messages: {}", messageCounter.get());
+        }
     }
 }

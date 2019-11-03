@@ -71,6 +71,8 @@ public class IncomingMessageEndpoint {
             throw new IllegalArgumentException("Invalid message!");
         }
 
+        log.info("Sending [{}] messages", serverConfiguration.getMessageMultiplier());
+
         for (int i = 0; i < serverConfiguration.getMessageMultiplier(); i++) {
             clientStore.getClients().forEach(
                 client -> client.getConnections().forEach(
