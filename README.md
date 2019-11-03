@@ -1,6 +1,6 @@
 ## Reactive WebSocket server ##
 
-This WebSocket server implementation demonstrates two basic ideas behind reactive programming:
+This WebSocket server implementation demonstrates two awesome ideas from reactive programming:
 1. Using a back-pressure in case of slow client.
 2. Applying an actor model to manage a data inside the server.
 
