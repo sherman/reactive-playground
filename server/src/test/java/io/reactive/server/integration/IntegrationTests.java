@@ -100,7 +100,7 @@ public class IntegrationTests {
     @Test
     public void checkDemand() throws Exception {
         // it's required sending enough messages to make a congestion
-        int messages = 20000;
+        int messages = 25000;
         AtomicBoolean barrier = new AtomicBoolean(true);
         CountDownLatch receiver = new CountDownLatch(messages);
         SlowWebSocketHandler clientMessagesHandler = new SlowWebSocketHandler(receiver, barrier, 10L);
