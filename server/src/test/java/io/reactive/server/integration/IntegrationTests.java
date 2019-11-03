@@ -221,7 +221,7 @@ public class IntegrationTests {
             byte[] buffer = new byte[frame.getPayload().remaining()];
             frame.getPayload().get(buffer);
             messages.add(new String(buffer, Charsets.UTF_8));
-            if (messages.size() % 100 == 0 || messages.size() > 19000) {
+            if (messages.size() % 100 == 0) {
                 log.info("Received: {}", messages.size());
             }
             latch.countDown();
