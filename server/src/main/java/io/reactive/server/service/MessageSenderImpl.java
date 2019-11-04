@@ -27,10 +27,7 @@ import io.reactive.server.domain.Message;
 import io.reactive.server.domain.ServerClient;
 import io.reactive.server.domain.ServerClientConnection;
 import io.reactive.server.domain.WebSocketMessage;
-import io.reactive.server.util.Actor;
-import io.reactive.server.util.ServerClientMessageList;
-import io.reactive.server.util.WebSocketSubscription;
-import io.reactive.server.util.WebSocketUtils;
+import io.reactive.server.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,9 +77,10 @@ public class MessageSenderImpl extends Actor<MessageSenderImpl.BaseMessage> impl
         ServerClientMessageList userMessages = clientsToMessages.computeIfAbsent(
             clientId, client -> new ServerClientMessageList(EvictingQueue.create(serverConfiguration.getMaxMessages())));
 
-        for (Message message : messages) {
-            userMessages.add(webSocketUtils.getMessage(message));
-        }
+        List<WebSocketMessage> webSocketMessages = messages.stream().map(webSocketUtils::getMessage)
+            .collect(GuavaCollectors.toImmutableList());
+
+        userMessages.add(webSocketMessages);
 
         enqueue(new Send(clientId));
     }

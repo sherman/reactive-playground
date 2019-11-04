@@ -24,6 +24,7 @@ import io.reactive.server.domain.WebSocketMessage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -40,6 +41,12 @@ public class ServerClientMessageList implements Iterable<WebSocketMessage> {
         // TODO: use non blocking queue (on CAS)
         synchronized (messages) {
             messages.offer(message);
+        }
+    }
+
+    public void add(@NotNull List<WebSocketMessage> messages) {
+        synchronized (this.messages) {
+            this.messages.addAll(messages);
         }
     }
 
