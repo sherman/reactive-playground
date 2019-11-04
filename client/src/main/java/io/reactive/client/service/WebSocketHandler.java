@@ -40,7 +40,7 @@ public class WebSocketHandler {
     public void onTextMessage(String message) {
         int messages = messageCounter.incrementAndGet();
         if (messages % 100000 == 0) {
-            //log.info("Messages: {}", messageCounter.get());
+            log.info("Messages: {}", messageCounter.get());
         }
     }
 }

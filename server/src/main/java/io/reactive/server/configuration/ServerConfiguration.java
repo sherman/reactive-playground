@@ -37,6 +37,14 @@ public class ServerConfiguration {
     @Named("server.max.messages")
     private int maxMessages;
 
+    @Inject
+    @Named("server.messages.generator.number")
+    private int generatorMessages;
+
+    @Inject
+    @Named("server.messages.generator.period.seconds")
+    private int generatorMessagesPeriod;
+
     public int getMaxMessagesInFlight() {
         return maxMessagesInFlight;
     }
@@ -47,5 +55,13 @@ public class ServerConfiguration {
 
     public int getMaxMessages() {
         return maxMessages;
+    }
+
+    public int getGeneratorMessages() {
+        return generatorMessages;
+    }
+
+    public int getGeneratorMessagesPeriod() {
+        return generatorMessagesPeriod;
     }
 }

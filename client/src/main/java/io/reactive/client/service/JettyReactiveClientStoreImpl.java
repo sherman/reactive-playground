@@ -43,7 +43,7 @@ public class JettyReactiveClientStoreImpl implements ReactiveClientStore {
     private final WebSocketHandler webSocketHandler;
 
     public JettyReactiveClientStoreImpl(String serverUrlTemplate) {
-        client = new WebSocketClient(Executors.newFixedThreadPool(8));
+        client = new WebSocketClient(Executors.newFixedThreadPool(64));
         client.setConnectTimeout(1000000);
 
         try {

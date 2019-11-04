@@ -31,7 +31,7 @@ public class ReactiveTestClientApp {
     private static final Logger log = LoggerFactory.getLogger(ReactiveTestClientApp.class);
 
     public static void main(String[] args) throws IOException {
-        ReactiveClientService clientService = new ReactiveClientServiceImpl(args[0], ClientType.NETTY);
+        ReactiveClientService clientService = new ReactiveClientServiceImpl(args[0], ClientType.JETTY);
         clientService.open(Integer.parseInt(args[1]));
 
         clientService.waitAndClose(Integer.parseInt(args[2]));

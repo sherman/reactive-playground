@@ -70,6 +70,7 @@ public class MessageSenderImpl extends Actor<MessageSenderImpl.BaseMessage> impl
     public void addMessage(long clientId, @NotNull Message message) {
         ServerClientMessageList messages = clientsToMessages.computeIfAbsent(
             clientId, client -> new ServerClientMessageList(EvictingQueue.create(serverConfiguration.getMaxMessages())));
+
         messages.add(webSocketUtils.getMessage(message));
         enqueue(new Send(clientId));
     }
@@ -78,9 +79,11 @@ public class MessageSenderImpl extends Actor<MessageSenderImpl.BaseMessage> impl
     public void addMessages(long clientId, @NotNull List<Message> messages) {
         ServerClientMessageList userMessages = clientsToMessages.computeIfAbsent(
             clientId, client -> new ServerClientMessageList(EvictingQueue.create(serverConfiguration.getMaxMessages())));
+
         for (Message message : messages) {
             userMessages.add(webSocketUtils.getMessage(message));
         }
+
         enqueue(new Send(clientId));
     }
 

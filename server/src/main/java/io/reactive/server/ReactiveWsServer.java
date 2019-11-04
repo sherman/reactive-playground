@@ -21,6 +21,7 @@ package io.reactive.server;
 
 import io.reactive.server.endpoint.ClientEndpoint;
 import io.reactive.server.endpoint.IncomingMessageEndpoint;
+import io.reactive.server.endpoint.MessageGeneratorEndpoint;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -62,6 +63,7 @@ public class ReactiveWsServer {
         ServerContainer container = WebSocketServerContainerInitializer.configureContext(context);
         container.addEndpoint(ClientEndpoint.class);
         container.addEndpoint(IncomingMessageEndpoint.class);
+        container.addEndpoint(MessageGeneratorEndpoint.class);
 
         server.setStopAtShutdown(true);
 
