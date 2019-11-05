@@ -1,3 +1,13 @@
+
+## Table of contents
+
+- [Reactive WebSocket server](#reactive-websocket-server)
+  * [Actor model](#actor-model)
+  * [Back-pressure](#back-pressure)
+  * [Benchmarking](#benchmarking)
+    + [Settings](#settings)
+    + [Results](#results)
+
 ## Reactive WebSocket server ##
 
 This WebSocket server implementation demonstrates two awesome ideas from reactive programming:
