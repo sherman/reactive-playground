@@ -63,6 +63,7 @@ So, I'd say, 10-15% of throughput is a good trade off for stability.
 ### Benchmarking ###
 
 Total messages: 100_000_000.
+
 1000 clients.
 
 #### Settings ####
