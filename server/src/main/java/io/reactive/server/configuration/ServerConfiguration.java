@@ -45,6 +45,10 @@ public class ServerConfiguration {
     @Named("server.messages.generator.period.seconds")
     private int generatorMessagesPeriod;
 
+    @Inject
+    @Named("server.messages.generator.batches")
+    private boolean generatorWithBatches;
+
     public int getMaxMessagesInFlight() {
         return maxMessagesInFlight;
     }
@@ -63,5 +67,9 @@ public class ServerConfiguration {
 
     public int getGeneratorMessagesPeriod() {
         return generatorMessagesPeriod;
+    }
+
+    public boolean isGeneratorWithBatches() {
+        return generatorWithBatches;
     }
 }

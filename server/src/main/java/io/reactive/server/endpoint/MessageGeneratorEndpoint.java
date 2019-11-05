@@ -94,24 +94,40 @@ public class MessageGeneratorEndpoint {
         generator = executorService.scheduleWithFixedDelay(
             () -> {
                 try {
-                    int buckets = serverConfiguration.getGeneratorMessages() / serverConfiguration.getMaxMessages();
-                    for (int i = 0; i < buckets; i++) {
-                        List<Message> messages = new ArrayList<>(serverConfiguration.getMaxMessages());
-                        for (int j = 0; j < serverConfiguration.getMaxMessages(); j++) {
-                            messages.add(userMessage);
-                        }
+                    if (serverConfiguration.isGeneratorWithBatches()) {
+                        int buckets = serverConfiguration.getGeneratorMessages() / serverConfiguration.getMaxMessages();
+                        for (int i = 0; i < buckets; i++) {
+                            List<Message> messages = new ArrayList<>(serverConfiguration.getMaxMessages());
+                            for (int j = 0; j < serverConfiguration.getMaxMessages(); j++) {
+                                messages.add(userMessage);
+                            }
 
-                        clientStore.getClients().forEach(
-                            client -> client.getConnections().forEach(
-                                connection -> {
-                                    try {
-                                        messageSender.addMessages(client.getId(), messages);
-                                    } catch (Exception e) {
-                                        log.error("Can't send a message", e);
+                            clientStore.getClients().forEach(
+                                client -> client.getConnections().forEach(
+                                    connection -> {
+                                        try {
+                                            messageSender.addMessages(client.getId(), messages);
+                                        } catch (Exception e) {
+                                            log.error("Can't send a message", e);
+                                        }
                                     }
-                                }
-                            )
-                        );
+                                )
+                            );
+                        }
+                    } else {
+                        for (int i = 0; i < serverConfiguration.getGeneratorMessages(); i++) {
+                            clientStore.getClients().forEach(
+                                client -> client.getConnections().forEach(
+                                    connection -> {
+                                        try {
+                                            messageSender.addMessage(client.getId(), userMessage);
+                                        } catch (Exception e) {
+                                            log.error("Can't send a message", e);
+                                        }
+                                    }
+                                )
+                            );
+                        }
                     }
                 } catch (Exception e) {
                     log.error("Can't add messages", e);

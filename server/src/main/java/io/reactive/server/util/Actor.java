@@ -91,6 +91,10 @@ public abstract class Actor<M> implements Runnable {
         log.error("[{}] message were discarded", discarded.get());
     }
 
+    protected int getQueueSize() {
+        return messages.size();
+    }
+
     private boolean tryToScheduleExecution() {
         if (working.compareAndSet(false, true)) {
             log.trace("Schedule execution");

@@ -69,7 +69,9 @@ public class MessageSenderImpl extends Actor<MessageSenderImpl.BaseMessage> impl
             clientId, client -> new ServerClientMessageList(EvictingQueue.create(serverConfiguration.getMaxMessages())));
 
         messages.add(webSocketUtils.getMessage(message));
-        enqueue(new Send(clientId));
+        if (getQueueSize() < 10000) {
+            enqueue(new Send(clientId));
+        }
     }
 
     @Override
