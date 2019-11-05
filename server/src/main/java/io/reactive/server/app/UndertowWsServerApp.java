@@ -22,7 +22,7 @@ package io.reactive.server.app;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.reactive.server.UndertowWsServer;
-import io.reactive.server.config.CommonModule;
+import io.reactive.server.configuration.CommonModule;
 import io.reactive.server.configuration.RootModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

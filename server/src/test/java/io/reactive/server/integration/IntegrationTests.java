@@ -25,7 +25,7 @@ import com.google.inject.Injector;
 import com.jayway.awaitility.Awaitility;
 import com.jayway.awaitility.core.ConditionTimeoutException;
 import io.reactive.server.ReactiveWsServer;
-import io.reactive.server.config.CommonModule;
+import io.reactive.server.configuration.CommonModule;
 import io.reactive.server.configuration.RootModule;
 import io.reactive.server.service.ServerClientStore;
 import org.eclipse.jetty.websocket.api.Session;

@@ -1,4 +1,4 @@
-package io.reactive.server.config;
+package io.reactive.server.configuration;
 
 /*
  * Copyright (C) 2019 by Denis M. Gabaydulin
