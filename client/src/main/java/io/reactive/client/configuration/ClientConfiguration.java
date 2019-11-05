@@ -1,4 +1,4 @@
-package io.reactive.server.util;
+package io.reactive.client.configuration;
 
 /*
  * Copyright (C) 2019 by Denis M. Gabaydulin
@@ -19,15 +19,17 @@ package io.reactive.server.util;
  * limitations under the License.
  */
 
-import io.reactive.common.util.InjectorHolder;
-
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
-import javax.websocket.server.ServerEndpointConfig;
 
 @Singleton
-public class WsEndpointConfigurator extends ServerEndpointConfig.Configurator {
-    @Override
-    public <T> T getEndpointInstance(Class<T> endpointClass) {
-        return (T) InjectorHolder.getInjector().getInstance(endpointClass);
+public class ClientConfiguration {
+    @Inject
+    @Named("client.read.delay.milliseconds")
+    private int readDelayMilliseconds;
+
+    public int getReadDelayMilliseconds() {
+        return readDelayMilliseconds;
     }
 }

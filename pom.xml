@@ -15,6 +15,7 @@
         <module>base-dependencies</module>
         <module>server</module>
         <module>client</module>
+        <module>base</module>
     </modules>
 
     <properties>
@@ -184,10 +185,19 @@
                 <artifactId>base-dependencies</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>io.reactive</groupId>
                 <artifactId>server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.reactive</groupId>
+                <artifactId>base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.reactive</groupId>
+                <artifactId>client</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

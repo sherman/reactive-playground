@@ -1,7 +1,7 @@
 package io.reactive.server.domain;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.reactive.server.configuration.RootModule;
+import io.reactive.common.configuration.RootModule;
 import io.reactive.server.util.json.JsonMapper;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;

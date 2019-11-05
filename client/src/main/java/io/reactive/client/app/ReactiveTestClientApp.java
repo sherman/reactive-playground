@@ -19,9 +19,13 @@ package io.reactive.client.app;
  * limitations under the License.
  */
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import io.reactive.client.configuration.ClientConfiguration;
 import io.reactive.client.domain.ClientType;
 import io.reactive.client.service.ReactiveClientService;
 import io.reactive.client.service.ReactiveClientServiceImpl;
+import io.reactive.common.configuration.RootModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,9 +35,17 @@ public class ReactiveTestClientApp {
     private static final Logger log = LoggerFactory.getLogger(ReactiveTestClientApp.class);
 
     public static void main(String[] args) throws IOException {
-        ReactiveClientService clientService = new ReactiveClientServiceImpl(args[0], ClientType.JETTY);
-        clientService.open(Integer.parseInt(args[1]));
+        log.info("Init application");
+        try {
+            Injector injector = Guice.createInjector(new RootModule());
 
-        clientService.waitAndClose(Integer.parseInt(args[2]));
+            ReactiveClientService clientService = new ReactiveClientServiceImpl(args[0], ClientType.JETTY, injector.getInstance(ClientConfiguration.class));
+            clientService.open(Integer.parseInt(args[1]));
+
+            clientService.waitAndClose(Integer.parseInt(args[2]));
+        } catch (Exception e) {
+            log.error("Can't init reactive server", e);
+            throw e;
+        }
     }
 }

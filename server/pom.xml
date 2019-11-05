@@ -17,6 +17,10 @@
             <artifactId>base-dependencies</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.reactive</groupId>
+            <artifactId>base</artifactId>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>

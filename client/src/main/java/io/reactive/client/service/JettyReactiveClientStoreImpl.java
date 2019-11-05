@@ -20,6 +20,7 @@ package io.reactive.client.service;
  */
 
 import io.reactive.client.ReactiveClient;
+import io.reactive.client.configuration.ClientConfiguration;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 import org.slf4j.Logger;
@@ -31,6 +32,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+// TODO: DI
 public class JettyReactiveClientStoreImpl implements ReactiveClientStore {
     private static final Logger log = LoggerFactory.getLogger(JettyReactiveClientStoreImpl.class);
 
@@ -42,7 +44,7 @@ public class JettyReactiveClientStoreImpl implements ReactiveClientStore {
     private final WebSocketClient client;
     private final WebSocketHandler webSocketHandler;
 
-    public JettyReactiveClientStoreImpl(String serverUrlTemplate) {
+    public JettyReactiveClientStoreImpl(String serverUrlTemplate, ClientConfiguration clientConfiguration) {
         client = new WebSocketClient(Executors.newFixedThreadPool(64));
         client.setConnectTimeout(1000000);
 
@@ -54,7 +56,7 @@ public class JettyReactiveClientStoreImpl implements ReactiveClientStore {
         }
 
         this.serverUrlTemplate = serverUrlTemplate;
-        this.webSocketHandler = new WebSocketHandler(messageCounter);
+        this.webSocketHandler = new WebSocketHandler(messageCounter, clientConfiguration.getReadDelayMilliseconds());
     }
 
     @Override

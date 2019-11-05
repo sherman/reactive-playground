@@ -19,6 +19,7 @@ package io.reactive.client.service;
  * limitations under the License.
  */
 
+// TODO: DI
 public interface ReactiveClientService {
     void open(int clients);
 

@@ -1,4 +1,4 @@
-package io.reactive.server.configuration;
+package io.reactive.common.configuration;
 
 /*
  * Copyright (C) 2019 by Denis M. Gabaydulin
@@ -20,16 +20,15 @@ package io.reactive.server.configuration;
  */
 
 import com.google.inject.AbstractModule;
-import io.reactive.server.util.InjectorHolder;
+import com.google.inject.name.Names;
+import io.reactive.common.util.InjectorHolder;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
-import static com.google.inject.name.Names.bindProperties;
-import static org.slf4j.LoggerFactory.getLogger;
-
 public class RootModule extends AbstractModule {
-    private static final Logger log = getLogger(RootModule.class);
+    private static final Logger log = LoggerFactory.getLogger(RootModule.class);
 
     public static final String SERVER_PROPERTIES = "application.properties";
 
@@ -40,7 +39,7 @@ public class RootModule extends AbstractModule {
         requestStaticInjection(InjectorHolder.class);
 
         try {
-            bindProperties(binder(), loadProperties());
+            Names.bindProperties(binder(), loadProperties());
         } catch (Exception e) {
             log.error("Fatal error in the guice module", e);
             throw new RuntimeException(e);

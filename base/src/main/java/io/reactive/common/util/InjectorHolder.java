@@ -1,4 +1,4 @@
-package io.reactive.server.util;
+package io.reactive.common.util;
 
 /*
  * Copyright (C) 2019 by Denis M. Gabaydulin

@@ -28,6 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+// TODO: DI
 public class NettyReactiveClientStoreImpl implements ReactiveClientStore {
     private static final Logger log = LoggerFactory.getLogger(NettyReactiveClientStoreImpl.class);
 

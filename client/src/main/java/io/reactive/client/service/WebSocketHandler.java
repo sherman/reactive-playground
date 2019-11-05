@@ -31,17 +31,20 @@ public class WebSocketHandler {
     private static final Logger log = LoggerFactory.getLogger(WebSocketHandler.class);
 
     private final AtomicInteger messageCounter;
+    private final int readDelay;
 
-    public WebSocketHandler(AtomicInteger messageCounter) {
+    public WebSocketHandler(AtomicInteger messageCounter, int readDelay) {
         this.messageCounter = messageCounter;
+        this.readDelay = readDelay;
     }
 
     @OnWebSocketMessage
     public void onTextMessage(String message) {
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if (readDelay > 0) {
+            try {
+                Thread.sleep(readDelay);
+            } catch (InterruptedException ignored) {
+            }
         }
         int messages = messageCounter.incrementAndGet();
         if (messages % 100000 == 0) {

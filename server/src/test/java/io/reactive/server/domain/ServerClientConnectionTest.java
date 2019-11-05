@@ -19,7 +19,7 @@ package io.reactive.server.domain;
  * limitations under the License.
  */
 
-import io.reactive.server.configuration.RootModule;
+import io.reactive.common.configuration.RootModule;
 import io.reactive.server.configuration.ServerConfiguration;
 import io.reactive.server.service.ServerClientConnectionFactory;
 import io.reactive.server.util.WebSocketSubscription;

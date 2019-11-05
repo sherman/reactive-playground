@@ -22,7 +22,6 @@ package io.reactive.server.configuration;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
-import io.reactive.server.configuration.ActorScope;
 
 import javax.inject.Singleton;
 import java.util.concurrent.ExecutorService;

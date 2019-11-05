@@ -1,4 +1,4 @@
-package io.reactive.server.configuration;
+package io.reactive.common.configuration;
 
 /*
  * Copyright (C) 2019 by Denis M. Gabaydulin
@@ -20,6 +20,7 @@ package io.reactive.server.configuration;
  */
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
-import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
 
 public class PropertiesLoader {
@@ -43,7 +43,7 @@ public class PropertiesLoader {
         Properties properties = new Properties();
         try {
             InputStream inputStream;
-            if (!isNullOrEmpty(fileName)) {
+            if (!Strings.isNullOrEmpty(fileName)) {
                 log.debug("Loading {} for {} from file: {}", propertyFileName, clazz.getSimpleName(), fileName);
 
                 inputStream = new FileInputStream(fileName);

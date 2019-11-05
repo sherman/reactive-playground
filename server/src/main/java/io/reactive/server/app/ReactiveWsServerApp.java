@@ -21,9 +21,9 @@ package io.reactive.server.app;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import io.reactive.common.configuration.RootModule;
 import io.reactive.server.ReactiveWsServer;
 import io.reactive.server.configuration.CommonModule;
-import io.reactive.server.configuration.RootModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
