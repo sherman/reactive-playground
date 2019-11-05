@@ -9,6 +9,7 @@ This WebSocket server implementation demonstrates two awesome ideas from reactiv
 Let's see how it helps to achieve greater throughput. The actor model here is used for sending messages to a client.
 MessageSenderImpl class is an actor. It has run() method to execute a real message sending.
 If there's messages for sending to a particular client, the Send event is emitted and the actor runner is scheduled.
+
 The actor runner is deadly simple. It's based on concurrent queue (should be replaced with a modern one lock-free impl.)
 and a regular executor service (which is actually running an actor task).
 
@@ -54,6 +55,7 @@ Now, let's turn on the back-pressure mechanism. Wow! You can see the effect.
 ![Back-pressure](with_back_pressure.png)
 
 Could the back-pressure reduces overall throughput?
+
 In my tests enabling the back-pressure reduces throughput up to 20%.
 But keep in mind, I did't tune a size of maximum messages in flight and buffer sizes of TCP/IP.
 So, I'd say, 10-15% of throughput is a good trade off for stability.   
