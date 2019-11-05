@@ -57,7 +57,7 @@ Now, let's turn on the back-pressure mechanism. Wow! You can see the effect.
 Could the back-pressure reduces overall throughput?
 
 In my tests enabling the back-pressure reduces throughput up to 20%.
-But keep in mind, I did't tune a size of maximum messages in flight and buffer sizes of TCP/IP.
+But keep in mind, I didn't tune a size of maximum messages in flight and buffer sizes of TCP/IP.
 So, I'd say, 10-15% of throughput is a good trade off for stability.   
 
   
