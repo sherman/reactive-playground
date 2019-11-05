@@ -63,6 +63,7 @@ public class UndertowWsServer {
             .setWorkerOption(Options.TCP_NODELAY, true)
             .setSocketOption(Options.TCP_NODELAY, true)
             .setSocketOption(Options.REUSE_ADDRESSES, true)
+            //.setSocketOption(Options.SEND_BUFFER, 8192)
             .build();
 
         server.start();

@@ -38,6 +38,11 @@ public class WebSocketHandler {
 
     @OnWebSocketMessage
     public void onTextMessage(String message) {
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         int messages = messageCounter.incrementAndGet();
         if (messages % 100000 == 0) {
             log.info("Messages: {}", messageCounter.get());
