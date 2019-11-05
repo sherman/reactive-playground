@@ -68,6 +68,16 @@ Total messages: 100_000_000.
 
 #### Settings ####
 
+Intel(R) Core(TM) i7-4770 CPU @ 3.40GHz (Haswell), 4 physical cores.
+
+JDK: 12.0.2 (2019-07-16)
+
+Ubuntu 18.04.3 LTS
+
+Kernel 4.15.0-66
+
+Meltdown/Spectre protection is disabled
+
 ```properties
 server.max.messages.in.flight=100
 server.messages.multiplier=1000000
