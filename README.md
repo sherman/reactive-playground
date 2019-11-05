@@ -58,7 +58,28 @@ Could the back-pressure reduces overall throughput?
 
 In my tests enabling the back-pressure reduces throughput up to 20%.
 But keep in mind, I didn't tune a size of maximum messages in flight and buffer sizes of TCP/IP.
-So, I'd say, 10-15% of throughput is a good trade off for stability.   
+So, I'd say, 10-15% of throughput is a good trade off for stability.
+
+### Benchmarking ###
+
+Total messages: 100_000_000.
+1000 clients.
+
+#### Settings ####
+
+```properties
+server.max.messages.in.flight=100
+server.messages.multiplier=1000000
+server.max.messages=5000
+server.messages.generator.number=1500000
+server.messages.generator.period.seconds=1
+server.messages.generator.batches=true
+```
+
+#### Results ####
+
+Throughput 1_351_598 msg/sec (avg)
+   
 
   
 
