@@ -23,7 +23,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.reactive.common.configuration.RootModule;
 import io.reactive.server.ReactiveWsServer;
-import io.reactive.server.configuration.CommonModule;
+import io.reactive.server.configuration.ActorModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,7 @@ public class ReactiveWsServerApp {
 
         log.info("Init application");
         try {
-            Injector injector = Guice.createInjector(new RootModule(), new CommonModule());
+            Injector injector = Guice.createInjector(new RootModule(), new ActorModule());
             injector.getInstance(ReactiveWsServer.class).start();
         } catch (Exception e) {
             log.error("Can't init reactive server", e);

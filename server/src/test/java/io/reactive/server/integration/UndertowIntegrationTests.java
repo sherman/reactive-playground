@@ -26,7 +26,7 @@ import com.jayway.awaitility.Awaitility;
 import com.jayway.awaitility.core.ConditionTimeoutException;
 import io.reactive.common.configuration.RootModule;
 import io.reactive.server.UndertowWsServer;
-import io.reactive.server.configuration.CommonModule;
+import io.reactive.server.configuration.ActorModule;
 import io.reactive.server.service.ServerClientStore;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketFrame;
@@ -50,7 +50,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.testng.Assert.assertEquals;
 
-@Guice(modules = {RootModule.class, CommonModule.class})
+@Guice(modules = {RootModule.class, ActorModule.class})
 public class UndertowIntegrationTests {
     private static final Logger log = LoggerFactory.getLogger(UndertowIntegrationTests.class);
 

@@ -27,7 +27,7 @@ import javax.inject.Singleton;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class CommonModule extends AbstractModule {
+public class ActorModule extends AbstractModule {
     @Override
     protected void configure() {
     }
