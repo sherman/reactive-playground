@@ -25,7 +25,7 @@
         <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>12</maven.compiler.target>
         <jetty.version>9.4.21.v20190926</jetty.version>
-        <jackson.version>2.10.0</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
         <netty-all.version>4.1.42.Final</netty-all.version>
         <version.io.undertow>2.0.27.Final</version.io.undertow>
     </properties>
